@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubicar-tcp-handler-deployment
+  namespace: development
+spec:
+  selector:
+    matchLabels:
+      app: ubicar-tcp-handler-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ubicar-tcp-handler-service
+    spec:
+      containers:
+      - name: ubicar-tcp-handler-service
+        image: 911093098549.dkr.ecr.us-east-2.amazonaws.com/tcp_server:0.4
+        ports:
+        - containerPort: 7011
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "550m"
+          limits:
+            memory: "300Mi"
+            cpu: "550m"

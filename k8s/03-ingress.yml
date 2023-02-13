@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ubicar-tcp-handler-nginx-ingress
+  namespace: development
+  annotations:
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/use-regex: "true"
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    # cert-manager.io/issuer: letsencrypt-nginx
+
+spec:
+  ingressClassName: nginx
+  # tls:
+  # - hosts:
+  #   - dev-gps.ubicar.app
+  #   secretName: letsencrypt-nginx
+  rules:
+  - host: dev-gps.ubicar.app
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: ubicar-tcp-handler-service
+            port:
+              number: 7011
