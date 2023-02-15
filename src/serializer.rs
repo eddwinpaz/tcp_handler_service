@@ -1,15 +1,7 @@
 use std::str;
 use std::error::Error;
 
-use serde::{ Serialize, Deserialize };
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct RawQueclinkData {
-    event_report: String,
-    raw: String,
-    imei: String,
-}
-
+use crate::model::RawQueclinkData;
 
 pub async fn serialize_message(payload: String) -> Result<String, Box<dyn Error>> {
     println!("tcp_handle_process::serialize_message::data: {:?}", payload.to_string());
